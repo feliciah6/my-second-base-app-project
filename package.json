@@ -1,0 +1,32 @@
+{
+  "name": "BaseApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^8.0.0",
+    "expo": "^30.0.1",
+    "expo-asset": "^1.1.0",
+    "expo-file-system": "^1.0.2",
+    "react": "16.5.0",
+    "react-native": "0.57.0",
+    "react-native-elements": "0.18.5",
+    "react-native-maps": "^0.22.0",
+    "react-native-vector-icons": "^6.0.2",
+    "react-navigation": "1.0.0-beta.27"
+  },
+  "devDependencies": {
+    "babel-jest": "23.6.0",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.45.3",
+    "react-test-renderer": "16.5.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
