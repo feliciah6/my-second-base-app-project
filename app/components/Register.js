@@ -8,7 +8,8 @@ import {
   TouchableHighlight,
   Image,
   KeyboardAvoidingView,
-  AsyncStorage
+  AsyncStorage,
+  Picker
 } from "react-native";
 
 import { StackNavigator } from "react-navigation";
@@ -98,7 +99,17 @@ static navigationOptions = {
             onSubmitEditing={() => this.serviceInput.focus()}
           />
 
-          <TextInput
+          <Picker
+            selectedValue={this.state.language}
+            style={styles.picker}
+            onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+            <Picker.Item label="service" value="service" />
+            <Picker.Item label="customer" value="Customer" />
+            <Picker.Item label="salonist" value="salonist" />
+            
+          </Picker>
+
+           <TextInput
             value={this.state.service}
             onChangeText={service => this.setState({ service })}
             ref={input => (this.serviceInput = input)}
@@ -179,6 +190,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 15,
     marginBottom: 10
+  },
+  picker:{
+    height: 40,
+    marginBottom: 10,
+    backgroundColor: "rgba(255,255,255,0.2)",
+    color: "#fff",
+    paddingHorizontal: 10,
+    
   },
   buttonText: {
     flex: 1,
