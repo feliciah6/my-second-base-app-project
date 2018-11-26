@@ -6,39 +6,41 @@ import {
   Text,
   View,
   Image,
+  ScrollView,
   TouchableOpacity
 } from 'react-native';
-
+import ImagePicker from 'react-native-image-picker';
 export default class Profile extends Component {
 
   render() {
     return (
+      <ScrollView>
       <View style={styles.container}>
-          <View style={styles.header}></View>
+          <View style={styles.header}></View> 
           <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
           <View style={styles.body}>
-            <View style={styles.bodyContent}>
+            <View style={styles.bodyContent }>
               <Text style={styles.name}>John Doe</Text>
               <Text style={styles.info}>UX Designer / Mobile developer</Text>
               <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
               
+                            
               <TouchableOpacity style={styles.buttonContainer}>
-                <Text style={styles.buttonText} >Opcion 1</Text>  
-              </TouchableOpacity>              
-              <TouchableOpacity style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Opcion 2</Text> 
+                <Text style={styles.buttonText}>SUBMIT</Text> 
               </TouchableOpacity>
             </View>
         </View>
       </View>
+      </ScrollView>
+
     );
   }
 }
 
 const styles = StyleSheet.create({
   header:{
-    backgroundColor: "#16a085",
-    height:200,
+    backgroundColor: "#36485f",
+    height:250,
   },
   avatar: {
     width: 130,
@@ -49,7 +51,8 @@ const styles = StyleSheet.create({
     marginBottom:10,
     alignSelf:'center',
     position: 'absolute',
-    marginTop:130
+    marginTop:10
+    
   },
   name:{
     fontSize:22,
@@ -58,11 +61,13 @@ const styles = StyleSheet.create({
   },
   body:{
     marginTop:40,
+    backgroundColor: "#36485f",
   },
   bodyContent: {
     flex: 1,
     alignItems: 'center',
     padding:30,
+    backgroundColor: "#36485f",
   },
   name:{
     fontSize:28,
@@ -83,7 +88,7 @@ const styles = StyleSheet.create({
   buttonText:{
     color: "#FFFF",
   },
-  buttonContainer: {
+  buttonContainer:{
     marginTop:10,
     height:45,
     flexDirection: 'row',
@@ -92,6 +97,7 @@ const styles = StyleSheet.create({
     marginBottom:20,
     width:250,
     borderRadius:30,
-    backgroundColor: "#16a085",
-  },
+    backgroundColor: "#C7367E"
+  }
+
 });

@@ -5,6 +5,7 @@ import {
   Text,
   View,
   TextInput,
+  ScrollView,
   TouchableHighlight,
   Image,
   KeyboardAvoidingView,
@@ -41,6 +42,45 @@ static navigationOptions = {
     },
     headerTintColor: '#fff',
   };
+  // onRegisterPress = () => {
+  //   const { email, password } = this.state;
+
+  //   this.setState({
+  //     loading: true
+  //   });
+
+  //   fetch("http://localhost:8000/register/user", {
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       email: email,
+  //       password: password
+  //     })
+  //   })
+  //     .then(response => response.json())
+  //     .then(responseJson => {
+  //       // If server response message same as Data Matched
+  //       if (responseJson.statusCode === 200) {
+
+  //         this.setState({
+  //           loading: false,
+  //           email: "false",
+  //           password: "password"
+  //         });
+  //         //Then open Profile activity and send user email to profile activity.
+  //         this.props.navigation.navigate("HomeScreen");
+  //       } else {
+  //         Alert.alert(responseJson.message);
+  //       }
+  //     })
+  //     .catch(error => {
+  //       this.setState({ error, loading: false });
+  //       console.error(error);
+  //     });
+  // };
 
   async onRegisterPress() {
     const { email, password, name, service, phone } = this.state;
@@ -54,10 +94,11 @@ static navigationOptions = {
     await AsyncStorage.setItem("phone", phone);
     await AsyncStorage.setItem("service", service);
     await AsyncStorage.setItem("password", password);
-    this.props.navigation.navigate("HomeScreen");
+    this.props.navigation.navigate("HomeScreen"); 
   }
   render() {
     return (
+      <ScrollView>
       <View behavior="padding" style={styles.container}>
         
         <KeyboardAvoidingView>
@@ -109,16 +150,7 @@ static navigationOptions = {
             
           </Picker>
 
-           <TextInput
-            value={this.state.service}
-            onChangeText={service => this.setState({ service })}
-            ref={input => (this.serviceInput = input)}
-            style={styles.input}
-            placeholder="Service"
-            placeholderTextColor="rgba(255,255,255,0.7)"
-            returnKeyType="next"
-            onSubmitEditing={() => this.passwordInput.focus()}
-          />
+          
 
           <TextInput
             value={this.state.password}
@@ -134,7 +166,7 @@ static navigationOptions = {
           />
 
           <TextInput
-            value={this.state.password}
+            value={this.state.password_confirmation}
             onChangeText={password_confirmation => this.setState({ password_confirmation })}
             style={styles.input}
             placeholder="Confirm Password"
@@ -153,6 +185,7 @@ static navigationOptions = {
           <Text style={styles.buttonText}>REGISTER </Text>
         </TouchableHighlight>
       </View>
+      </ScrollView>
     );
   }
 }
