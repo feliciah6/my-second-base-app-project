@@ -3,9 +3,9 @@ import { Text, View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 
-import LocationScreen from './LocationScreen';
-import ProfileScreen from  './ProfileScreen';
-import ListScreen from './ListScreen';
+import LocationScreen from './screens/LocationScreen';
+import ProfileScreen from  './screens/ProfileScreen';
+import ListScreen from '../components/screens/ListScreen';
 
 
 

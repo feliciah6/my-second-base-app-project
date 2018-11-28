@@ -80,8 +80,7 @@ static navigationOptions = {
   //       this.setState({ error, loading: false });
   //       console.error(error);
   //     });
-  // };
-
+   
   async onRegisterPress() {
     const { email, password, name, service, phone } = this.state;
     console.log(email);
@@ -98,7 +97,7 @@ static navigationOptions = {
   }
   render() {
     return (
-      <ScrollView>
+      <ScrollView style={{backgroundColor:"#36485f"}}>
       <View behavior="padding" style={styles.container}>
         
         <KeyboardAvoidingView>

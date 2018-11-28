@@ -1,20 +1,18 @@
 import React, { Component } from "react";
 import {
-  View,
   AppRegistry,
+  View,
   Text,
-  Alert,
   FlatList,
+  Image,
   ActivityIndicator,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableWithoutFeedback
+  StyleSheet
 } from "react-native";
 import { List, ListItem, SearchBar } from "react-native-elements";
  
-export default class ListScreen extends Component {
-  constructor() {
-    super();
+export default class ServicesScreen extends Component {
+  constructor(props) {
+    super(props);
  
     this.state = {
       loading: false,
@@ -42,6 +40,7 @@ export default class ListScreen extends Component {
     },
     headerTintColor: "#fff"
   };
+   
  
   componentDidMount() {
     this.makeRemoteRequest();
@@ -49,7 +48,7 @@ export default class ListScreen extends Component {
  
   makeRemoteRequest = () => {
     const { page, seed } = this.state;
-    const url = `https://hair-care-db--feliciahmtoka.repl.co/saloon`;
+    const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
     this.setState({
       loading: true
     });
@@ -58,7 +57,7 @@ export default class ListScreen extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({
-          data: page === 1 ? res : [...this.state.data, ...res],
+          data: page === 1 ? res.results : [...this.state.data, ...res.results],
           error: res.error || null,
           loading: false,
           refreshing: false
@@ -107,21 +106,6 @@ export default class ListScreen extends Component {
     );
   };
  
-  renderHeader = () => {
-    return (
-      <SearchBar
-        placeholder="Type Here..."
-        darkTheme
-        round
-        containerStyle={{
-          borderTopWidth: 0,
-          borderBottomWidth: 0
-        }}
-        inputStyle={{ backgroundColor: "white" }}
-      />
-    );
-  };
- 
   renderFooter = () => {
     if (!this.state.loading) return null;
  
@@ -139,42 +123,43 @@ export default class ListScreen extends Component {
   };
  
   render() {
-    const url = `https://media.glamour.com/photos/5b0445a8f3eab061599ef3da/master/pass/hair-salo98n.jpg`;
     return (
       <View behavior="padding" style={styles.container}>
-        <List
-          containerStyle={{
-            flex: 1,
-            borderTopWidth: 0,
-            borderBottomWidth: 0
-          }}
-        >
-          <FlatList
-            data={this.state.data}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={{ flex: 1 }}
-                onPress={() => this.props.navigation.navigate("ServicesScreen")}
-              >
-                <ListItem
-                  roundAvatar
-                  title={`${item.name} ${item.description}`}
-                  subtitle={`${item.opening_time} - ${item.closing_time}`}
-                  avatar={{ uri: url}}
-                  containerStyle={{ borderBottomWidth: 0 }}
-                />
-              </TouchableOpacity>
-            )}
-            keyExtractor={item => item.email}
-            ItemSeparatorComponent={this.renderSeparator}
-            // ListHeaderComponent={this.renderHeader}
-            ListFooterComponent={this.renderFooter}
-            onRefresh={this.handleRefresh}
-            refreshing={this.state.refreshing}
-            onEndReached={this.handleLoadMore}
-            onEndReachedThreshold={50}
-          />
-        </List>
+ 
+        <FlatList
+          data={this.state.data}
+          numColumns={2}
+          renderItem={({ item }) => (
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "column",
+                alignItems: "flex-start",
+                marginRight: 2,
+                marginLeft: 2,
+                marginTop: 2,
+                padding: 5
+              }}
+            >
+              <Image
+                source={{
+                  uri:
+                    "https://media.glamour.com/photos/5b0445a8f3eab061599ef3da/master/pass/hair-salo98n.jpg"
+                }}
+                style={styles.imageView}
+              />
+ 
+              <Text style={styles.textView}>Hair Treatment</Text>
+              <Text style={styles.textView}>ksh 3,500</Text>
+            </View>
+          )}
+          keyExtractor={item => item.email}
+          ListFooterComponent={this.renderFooter}
+          onRefresh={this.handleRefresh}
+          refreshing={this.state.refreshing}
+          onEndReached={this.handleLoadMore}
+          onEndReachedThreshold={50}
+        />
       </View>
     );
   }
@@ -183,8 +168,26 @@ export default class ListScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#36485f"
+    backgroundColor: "#FFFF"
+  },
+  imageView: {
+    width: "100%",
+    height: 200,
+    margin: 7,
+    padding: 10,
+    borderRadius: 7
+  },
+  textView: {
+    width: "100%",
+    textAlignVertical: "center",
+    padding: 5,
+    color: "#000"
+  },
+  list: {
+    justifyContent: "center",
+    flexDirection: "row",
+    flexWrap: "wrap"
   }
 });
  
-AppRegistry.registerComponent("ListScreen", () => ListScreen);
+AppRegistry.registerComponent("ServicesScreen", () => ServicesScreen);
